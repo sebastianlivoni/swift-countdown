@@ -23,31 +23,28 @@ struct CountdownList: View {
         
     }
     
+    func deleteItem(at offsets: IndexSet) {
+        model.countdowns.remove(atOffsets: offsets)
+    }
+    
     var body: some View {
         NavigationView {
-            List(model.countdowns, id: \.id) { countdown in
-                NavigationLink {
-                    CountdownView(countdown: countdown, model: model)
-                } label: {
-                    CountdownRow(countdown: countdown)
+            List {
+                ForEach(model.countdowns, id: \.id) { countdown in
+                    NavigationLink {
+                        CountdownView(countdown: countdown, model: model)
+                    } label: {
+                        CountdownRow(countdown: countdown)
+                    }
                 }
-                .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                .onDelete(perform: deleteItem)
+                /*.swipeActions(edge: .leading, allowsFullSwipe: false) {
                     Button {
                         activeSheet = countdown
                     } label: {
                         Label("Edit", systemImage: "pencil")
                     }
                     .tint(.gray)
-                }
-                /*.swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button {
-                        withAnimation {
-                            model.countdowns.removeAll(where: { $0 == countdown })
-                        }
-                    } label: {
-                        Label("Delete", systemImage: "minus.circle")
-                    }
-                    .tint(.red)
                 }*/
             }
                         

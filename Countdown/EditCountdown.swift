@@ -24,6 +24,10 @@ struct EditCountdown: View {
         
         dismiss()
     }
+    
+    func deleteCountdown() {
+        
+    }
  
     var body: some View {
         NavigationView {
@@ -53,7 +57,11 @@ struct EditCountdown: View {
                         }
                     }
                     
-                    Button("Update countdown", action: updateCountdown)
+                    Button("Update this countdown", action: updateCountdown)
+                    Button(action: deleteCountdown) {
+                        Text("Delete this countdown")
+                            .foregroundColor(Color.red)
+                    }
                 }
             }
             
