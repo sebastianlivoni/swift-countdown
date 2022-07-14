@@ -10,9 +10,12 @@ import SwiftUI
 @main
 struct CountdownApp: App {
     
+    @StateObject private var dataController = DataController()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(model: Model())
+            ContentView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

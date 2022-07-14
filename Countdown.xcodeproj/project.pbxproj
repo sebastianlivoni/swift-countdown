@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		962978132880B91500063529 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 962978112880B91500063529 /* Model.xcdatamodeld */; };
 		967AB65828775B6C0011E3C0 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967AB65728775B6C0011E3C0 /* WidgetKit.framework */; };
 		967AB65A28775B6C0011E3C0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 967AB65928775B6C0011E3C0 /* SwiftUI.framework */; };
 		967AB65D28775B6C0011E3C0 /* widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967AB65C28775B6C0011E3C0 /* widget.swift */; };
@@ -17,9 +18,9 @@
 		967AB66C28775E210011E3C0 /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2527D286FAA430012A744 /* Countdown.swift */; };
 		96B2527C286FA9B70012A744 /* CountdownRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2527B286FA9B70012A744 /* CountdownRow.swift */; };
 		96B2527E286FAA430012A744 /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2527D286FAA430012A744 /* Countdown.swift */; };
-		96B25280286FAD510012A744 /* CountdownList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B2527F286FAD510012A744 /* CountdownList.swift */; };
-		96B25282286FAEEA0012A744 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B25281286FAEEA0012A744 /* CountdownView.swift */; };
-		96B9F4352870E910003BBB31 /* AddCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B9F4342870E910003BBB31 /* AddCountdown.swift */; };
+		96B25282286FAEEA0012A744 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B25281286FAEEA0012A744 /* DetailView.swift */; };
+		96B82A9228804C5D00F66973 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B82A9128804C5D00F66973 /* DataController.swift */; };
+		96B9F4352870E910003BBB31 /* AddCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B9F4342870E910003BBB31 /* AddCountdownView.swift */; };
 		96C07CB5286F027D007D0431 /* CountdownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C07CB4286F027D007D0431 /* CountdownApp.swift */; };
 		96C07CB7286F027D007D0431 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C07CB6286F027D007D0431 /* ContentView.swift */; };
 		96C07CB9286F0280007D0431 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96C07CB8286F0280007D0431 /* Assets.xcassets */; };
@@ -27,7 +28,7 @@
 		96C07CC6286F0280007D0431 /* CountdownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C07CC5286F0280007D0431 /* CountdownTests.swift */; };
 		96C07CD0286F0280007D0431 /* CountdownUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C07CCF286F0280007D0431 /* CountdownUITests.swift */; };
 		96C07CD2286F0280007D0431 /* CountdownUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C07CD1286F0280007D0431 /* CountdownUITestsLaunchTests.swift */; };
-		96DC55152871B05600FA2811 /* EditCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DC55142871B05600FA2811 /* EditCountdown.swift */; };
+		96DC55152871B05600FA2811 /* EditCountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DC55142871B05600FA2811 /* EditCountdownView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		9607986528748E7A00F69628 /* Countdown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Countdown.entitlements; sourceTree = "<group>"; };
+		962978122880B91500063529 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		967AB65528775B6C0011E3C0 /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		967AB65728775B6C0011E3C0 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		967AB65928775B6C0011E3C0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -80,9 +82,9 @@
 		967AB66728775B6E0011E3C0 /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 		96B2527B286FA9B70012A744 /* CountdownRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownRow.swift; sourceTree = "<group>"; };
 		96B2527D286FAA430012A744 /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
-		96B2527F286FAD510012A744 /* CountdownList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownList.swift; sourceTree = "<group>"; };
-		96B25281286FAEEA0012A744 /* CountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
-		96B9F4342870E910003BBB31 /* AddCountdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCountdown.swift; sourceTree = "<group>"; };
+		96B25281286FAEEA0012A744 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		96B82A9128804C5D00F66973 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		96B9F4342870E910003BBB31 /* AddCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCountdownView.swift; sourceTree = "<group>"; };
 		96C07CB1286F027D007D0431 /* Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C07CB4286F027D007D0431 /* CountdownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownApp.swift; sourceTree = "<group>"; };
 		96C07CB6286F027D007D0431 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		96C07CCB286F0280007D0431 /* CountdownUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C07CCF286F0280007D0431 /* CountdownUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownUITests.swift; sourceTree = "<group>"; };
 		96C07CD1286F0280007D0431 /* CountdownUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		96DC55142871B05600FA2811 /* EditCountdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCountdown.swift; sourceTree = "<group>"; };
+		96DC55142871B05600FA2811 /* EditCountdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCountdownView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 		96C07CA8286F027D007D0431 = {
 			isa = PBXGroup;
 			children = (
+				962978112880B91500063529 /* Model.xcdatamodeld */,
 				967AB66728775B6E0011E3C0 /* widgetExtension.entitlements */,
 				96C07CB3286F027D007D0431 /* Countdown */,
 				96C07CC4286F0280007D0431 /* CountdownTests */,
@@ -184,10 +187,10 @@
 				96C07CB8286F0280007D0431 /* Assets.xcassets */,
 				96C07CBA286F0280007D0431 /* Preview Content */,
 				96B2527D286FAA430012A744 /* Countdown.swift */,
-				96B2527F286FAD510012A744 /* CountdownList.swift */,
-				96B25281286FAEEA0012A744 /* CountdownView.swift */,
-				96B9F4342870E910003BBB31 /* AddCountdown.swift */,
-				96DC55142871B05600FA2811 /* EditCountdown.swift */,
+				96B25281286FAEEA0012A744 /* DetailView.swift */,
+				96B9F4342870E910003BBB31 /* AddCountdownView.swift */,
+				96DC55142871B05600FA2811 /* EditCountdownView.swift */,
+				96B82A9128804C5D00F66973 /* DataController.swift */,
 			);
 			path = Countdown;
 			sourceTree = "<group>";
@@ -388,13 +391,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96B25282286FAEEA0012A744 /* CountdownView.swift in Sources */,
+				96B25282286FAEEA0012A744 /* DetailView.swift in Sources */,
 				96C07CB7286F027D007D0431 /* ContentView.swift in Sources */,
-				96B9F4352870E910003BBB31 /* AddCountdown.swift in Sources */,
+				96B9F4352870E910003BBB31 /* AddCountdownView.swift in Sources */,
 				967AB66328775B6E0011E3C0 /* widget.intentdefinition in Sources */,
-				96B25280286FAD510012A744 /* CountdownList.swift in Sources */,
+				96B82A9228804C5D00F66973 /* DataController.swift in Sources */,
 				96B2527C286FA9B70012A744 /* CountdownRow.swift in Sources */,
-				96DC55152871B05600FA2811 /* EditCountdown.swift in Sources */,
+				96DC55152871B05600FA2811 /* EditCountdownView.swift in Sources */,
+				962978132880B91500063529 /* Model.xcdatamodeld in Sources */,
 				96C07CB5286F027D007D0431 /* CountdownApp.swift in Sources */,
 				96B2527E286FAA430012A744 /* Countdown.swift in Sources */,
 			);
@@ -799,6 +803,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		962978112880B91500063529 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				962978122880B91500063529 /* Model.xcdatamodel */,
+			);
+			currentVersion = 962978122880B91500063529 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = Countdown/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 96C07CA9286F027D007D0431 /* Project object */;
 }

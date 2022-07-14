@@ -7,50 +7,36 @@
 
 import SwiftUI
 
-struct CountdownView: View {
-    let countdown: Countdown
+struct DetailView: View {
+    let countdown: CountdownEntity
     
-    @State var activeSheet: Countdown?
+    @State private var showingAddScreen = false
     @State var timeRemaining = ""
-    @ObservedObject var model: Model
     
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     
-    func timeRemainingInText() -> String {
-        let remainingInterval = calcRemainingSecondsFromNow(date: countdown.endDate)
-        
-        return formatTimeInterval(interval: remainingInterval)
-    }
-    
-    func formatTimeInterval(interval: TimeInterval) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
-        formatter.allowedUnits = .day
-        
-        return formatter.string(from: interval) ?? "No interval"
-    }
-    
-    func formatDate(date: Date) -> String {
+    func formatDate() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "d. MMMM yyyy"
-        return formatter.string(from: date).lowercased()
+        return formatter.string(from: countdown.endDate ?? Date()).lowercased()
     }
     
-    func calcRemainingSecondsFromNow(date end: Date) -> TimeInterval {
-        if end >= Date() {
-            return DateInterval(start: Date(), end: end).duration
-        } else {
-            return TimeInterval()
-        }
+    func timeRemainingInText() -> String {
+        let formatter = DateComponentsFormatter()
+        let remainingInterval = DateInterval(start: Date(), end: countdown.endDate ?? Date()).duration
+        formatter.unitsStyle = .full
+        formatter.allowedUnits = [.day]
+        
+        return formatter.string(from: remainingInterval) ?? "No interval"
     }
     
     func edit() {
-        activeSheet = countdown
+        showingAddScreen = true
     }
     
     var body: some View {
         VStack {
-            Text(countdown.description)
+            Text(countdown.desc ?? "No description")
                 .font(.body)
             
             widget
@@ -65,14 +51,14 @@ struct CountdownView: View {
         }
         .padding(.all, 20)
         
-        .navigationBarTitle(countdown.name)
+        .navigationBarTitle(countdown.name ?? "No name")
         .navigationBarItems(
             trailing: Button(action: edit) {
                 Text("Rediger")
             }
         )
-        .fullScreenCover(item: $activeSheet) { item in
-            EditCountdown(countdown: item, model: model)
+        .fullScreenCover(isPresented: $showingAddScreen) {
+            EditCountdownView(countdown: countdown)
         }
     }
     
@@ -82,19 +68,19 @@ struct CountdownView: View {
             .frame(width: 225, height: 225)
         .overlay(
             VStack(alignment: .center) {
-                Text(countdown.name)
+                Text(countdown.name ?? "No name")
                     .fontWeight(.medium)
                     .font(.system(size: 20))
                 
                 Spacer()
                 
-                Text(timeRemaining)
+                Text(timeRemainingInText())
                     .font(.system(size: 40))
                     .fontWeight(.heavy)
                 
                 Spacer()
                 
-                Text("\(formatDate(date: countdown.endDate))")
+                Text(formatDate())
                     .font(.system(size: 16))
                     .fontWeight(.heavy)
             }
@@ -103,8 +89,8 @@ struct CountdownView: View {
         )
     }
 }
-
-struct CountdownView_Previews: PreviewProvider {
+/*
+struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         let countdown = Countdown(name: "Seb's Birthday", description: "A countdown until my birthday. Will check daily!", endDate: Date(timeIntervalSinceReferenceDate: 685670400), imageName: "birthday")
         
@@ -114,3 +100,4 @@ struct CountdownView_Previews: PreviewProvider {
         .previewInterfaceOrientation(.portraitUpsideDown)
     }
 }
+*/

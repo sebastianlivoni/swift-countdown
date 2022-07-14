@@ -7,21 +7,25 @@
 
 import SwiftUI
 
-struct EditCountdown: View {
+struct EditCountdownView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) var viewContext
     
-    @State var countdown: Countdown
-    @ObservedObject var model: Model
+    @State var countdown: CountdownEntity
     
     @State var name: String = ""
     @State var description: String = ""
+    @State var imageName: String = ""
     @State var endDate: Date = Date()
     @State var notificationEnabled: Bool = false
     
     func updateCountdown() {
+        countdown.name = name
+        countdown.desc = description
+        countdown.endDate = endDate
+        countdown.imageName = imageName
         
-        model.update(countdown: countdown, Updated: Countdown(name: name, description: description, endDate: endDate, imageName: "birthday"))
-        
+        //try? viewContext.save()
         dismiss()
     }
     
@@ -36,17 +40,24 @@ struct EditCountdown: View {
                     Section(header: Text("INFORMATION ABOUT THE EVENT")) {
                         TextField("Name of event", text: $name)
                             .onAppear() {
-                                self.name = countdown.name
+                                self.name = countdown.name ?? "No name"
                             }
                         
                         TextField("Description of event", text: $description)
                             .onAppear() {
-                                self.description = countdown.description
+                                self.description = countdown.desc ?? "No desc"
+                            }
+                    }
+                    
+                    Section(header: Text("DECORATION")) {
+                        TextField("What image do you want?", text: $imageName)
+                            .onAppear() {
+                                self.imageName = countdown.imageName ?? "birthday"
                             }
                     }
                     
                     Section(header: Text("DATE")) {
-                        DatePicker("Select end date", selection: $endDate, displayedComponents: [.date])
+                        DatePicker("Select end date", selection: $endDate)
                             .datePickerStyle(.graphical)
                             .labelsHidden()
                     }
@@ -75,9 +86,9 @@ struct EditCountdown: View {
     }
 }
 
-struct EditCountdown_Previews: PreviewProvider {
+/*struct EditCountdownView_Previews: PreviewProvider {
     
     static var previews: some View {
         EditCountdown(countdown: Countdown(name: "Din lort", description: "lort", endDate: Date(timeIntervalSinceReferenceDate: 8686868), imageName: "birthday"), model: Model())
     }
-}
+}*/

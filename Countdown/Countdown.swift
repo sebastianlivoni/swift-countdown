@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import CoreData
 
 struct Countdown: Hashable, Codable, Identifiable {
     var id = UUID()
@@ -27,8 +26,8 @@ class Model: ObservableObject {
     init() {
         self.countdowns = [
             Countdown(name: "Seb's Birthday", description: "A countdown until my birthday. Will check daily!", endDate: Date(timeIntervalSinceReferenceDate: 685670400), imageName: "birthday"),
-            Countdown(name: "Christmas Day", description: "This is Christmas", endDate: Date(timeIntervalSinceReferenceDate: 685680400), imageName: "birthday"),
-            Countdown(name: "Thanksgiving", description: "This is Christmas", endDate: Date(timeIntervalSinceReferenceDate: 685690400), imageName: "birthday")
+            Countdown(name: "Christmas Day", description: "This is Christmas", endDate: Date(timeIntervalSinceReferenceDate: 693532800), imageName: "birthday"),
+            Countdown(name: "Thanksgiving", description: "This is Thanksgiving", endDate: Date(timeIntervalSinceReferenceDate: 690940800), imageName: "birthday")
         ]
     }
     

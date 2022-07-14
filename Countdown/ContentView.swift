@@ -9,46 +9,55 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @State private var date = Date()
-    @State private var timeRemaining = "Waiting for start..."
+    @FetchRequest(sortDescriptors: []) var countdowns: FetchedResults<CountdownEntity>
+    @Environment(\.managedObjectContext) var viewContext
     
-    @State public var model: Model
-    
-    func addTimer() {
-        print("addTimer")
-    }
-    
-    func updateTimer() {
-        let interval = calcRemainingSecondsFromNow(date: date)
-        
-        timeRemaining = formatTimeInterval(interval: interval)
-    }
-    
-    func formatTimeInterval(interval: TimeInterval) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
-        
-        return formatter.string(from: interval) ?? "No interval"
-    }
-    
-    
-    func calcRemainingSecondsFromNow(date end: Date) -> TimeInterval {
-        if end >= Date() {
-            return DateInterval(start: Date(), end: date).duration
-        } else {
-            return TimeInterval()
-        }
-    }
+    @State private var editMode = EditMode.inactive
+    @State private var showingAddScreen = false
  
     var body: some View {
         VStack {
-            CountdownList(model: model)
+            NavigationView {
+                List {
+                    ForEach(countdowns, id: \.id) { countdown in
+                        NavigationLink {
+                            DetailView(countdown: countdown)
+                        } label: {
+                            CountdownRow(countdown: countdown)
+                        }
+                    }
+                    .onDelete(perform: delete)
+                }
+                            
+                .navigationTitle("Countdowns")
+                .navigationBarItems(
+                    leading: EditButton(),
+                    trailing: Button {
+                        showingAddScreen.toggle()
+                    } label: {
+                        Label("Add Countdown", systemImage: "plus")
+                    }
+                )
+                .environment(\.editMode, $editMode)
+            }
+            .sheet(isPresented: $showingAddScreen) {
+                AddCountdownView()
+            }
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        offsets.map { countdowns[$0] }.forEach(viewContext.delete)
+        
+        try? viewContext.save()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static var dataController = DataController()
+    
     static var previews: some View {
-        ContentView(model: Model())
+        ContentView()
+            .environment(\.managedObjectContext, dataController.container.viewContext)
     }
 }

@@ -7,21 +7,26 @@
 
 import SwiftUI
 
-struct AddCountdown: View {
+struct AddCountdownView: View {
     @Environment(\.dismiss) var dismiss
-    
-    @State var model: Model
+    @Environment(\.managedObjectContext) var viewContext
     
     @State var name: String = ""
     @State var description: String = ""
+    @State var imageName: String = ""
     @State var endDate: Date = Date()
     @State var notificationEnabled: Bool = false
     
     func createCountdown() {
-        let newCountdown = Countdown(name: name, description: description, endDate: endDate, imageName: "birthday")
-
-        model.countdowns.append(newCountdown)
+        let newCountdown = CountdownEntity(context: viewContext)
+        newCountdown.id = UUID()
+        newCountdown.name = name
+        newCountdown.desc = description
+        newCountdown.imageName = imageName
+        newCountdown.endDate = endDate
+        // newCountdown.notificationEnabled = notificationEnabled
         
+        try? viewContext.save()
         dismiss()
     }
  
@@ -35,8 +40,12 @@ struct AddCountdown: View {
                         TextField("Description of event", text: $description)
                     }
                     
+                    Section(header: Text("DECORATION")) {
+                        TextField("What image do you want?", text: $imageName)
+                    }
+                    
                     Section(header: Text("DATE")) {
-                        DatePicker("Select end date", selection: $endDate, displayedComponents: [.date])
+                        DatePicker("Select end date", selection: $endDate)
                             .datePickerStyle(.graphical)
                             .labelsHidden()
                     }
@@ -47,22 +56,26 @@ struct AddCountdown: View {
                         }
                     }
                     
-                    Button("Create new countdown", action: createCountdown)
+                    Section {
+                        Button("Create new countdown", action: createCountdown)
+                    }
                 }
             }
             
             .navigationTitle("Add Countdown")
             .navigationBarItems(
-                trailing: Button("Dismiss") {
+                trailing: Button {
                     dismiss()
+                } label: {
+                    Text("Dismiss")
                 }
             )
         }
     }
 }
 
-struct AddCountdown_Previews: PreviewProvider {
+struct AddCountdownView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCountdown(model: Model())
+        AddCountdownView()
     }
 }
