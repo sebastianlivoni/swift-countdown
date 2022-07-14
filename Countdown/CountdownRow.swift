@@ -10,17 +10,21 @@ import SwiftUI
 struct CountdownRow: View {
     var countdown: CountdownEntity
     
+    let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+    
+    @State var timeRemaining = ""
+    
     func formatDate() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "d. MMMM yyyy"
         return formatter.string(from: countdown.endDate ?? Date()).lowercased()
     }
     
-    func timeRemaining() -> String {
+    func timeRemainingInText() -> String {
         let formatter = DateComponentsFormatter()
         let remainingInterval = DateInterval(start: Date(), end: countdown.endDate ?? Date()).duration
         formatter.unitsStyle = .full
-        formatter.allowedUnits = [.day, .hour, .minute]
+        formatter.allowedUnits = [.day, .hour, .minute, .second]
         
         return formatter.string(from: remainingInterval) ?? "No interval"
     }
@@ -32,8 +36,14 @@ struct CountdownRow: View {
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading) {
                 Text(countdown.name ?? "No name")
-                Text(timeRemaining())
+                Text("\(timeRemaining)")
                     .font(.system(size: 12))
+                    .onReceive(timer) { _ in
+                        self.timeRemaining = timeRemainingInText()
+                    }
+                    .onAppear {
+                        self.timeRemaining = timeRemainingInText()
+                    }
                 Text(formatDate())
                     .font(.system(size: 12))
             }
