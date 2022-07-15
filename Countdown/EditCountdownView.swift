@@ -25,12 +25,18 @@ struct EditCountdownView: View {
         countdown.endDate = endDate
         countdown.imageName = imageName
         
-        //try? viewContext.save()
-        dismiss()
+        if endDate > Date() {
+            try? viewContext.save()
+            dismiss()
+        }
     }
     
     func deleteCountdown() {
+        viewContext.delete(countdown)
         
+        try? viewContext.save()
+        
+        dismiss()
     }
  
     var body: some View {

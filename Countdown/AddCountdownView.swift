@@ -23,11 +23,12 @@ struct AddCountdownView: View {
         newCountdown.name = name
         newCountdown.desc = description
         newCountdown.imageName = imageName
-        newCountdown.endDate = endDate
-        // newCountdown.notificationEnabled = notificationEnabled
         
-        try? viewContext.save()
-        dismiss()
+        if endDate > Date() {
+            try? viewContext.save()
+            dismiss()
+        }
+        // newCountdown.notificationEnabled = notificationEnabled
     }
  
     var body: some View {
