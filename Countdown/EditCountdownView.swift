@@ -66,6 +66,9 @@ struct EditCountdownView: View {
                         DatePicker("Select end date", selection: $endDate)
                             .datePickerStyle(.graphical)
                             .labelsHidden()
+                            .onAppear() {
+                                self.endDate = countdown.endDate ?? Date()
+                            }
                     }
                     
                     Section(header: Text("NOTIFICATIONS")) {

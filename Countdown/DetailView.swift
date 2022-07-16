@@ -89,15 +89,18 @@ struct DetailView: View {
         )
     }
 }
-/*
+
 struct DetailView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        let countdown = Countdown(name: "Seb's Birthday", description: "A countdown until my birthday. Will check daily!", endDate: Date(timeIntervalSinceReferenceDate: 685670400), imageName: "birthday")
+        let dataController = DataController()
+        let context = dataController.container.viewContext
         
-        NavigationView {
-            CountdownView(countdown: countdown, model: Model())
+        let countdown = CountdownEntity(context: context)
+        countdown.name = "hej"
+        
+        return NavigationView {
+            DetailView(countdown: countdown)
         }
-        .previewInterfaceOrientation(.portraitUpsideDown)
     }
 }
-*/
