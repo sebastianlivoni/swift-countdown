@@ -16,6 +16,7 @@ struct AddCountdownView: View {
     @State var imageName: String = ""
     @State var endDate: Date = Date()
     @State var notificationEnabled: Bool = false
+    @State var selectedEmoji: Int = 0
     
     func createCountdown() {
         let newCountdown = CountdownEntity(context: viewContext)

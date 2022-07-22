@@ -15,21 +15,6 @@ struct DetailView: View {
     
     let timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     
-    func formatDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d. MMMM yyyy"
-        return formatter.string(from: countdown.endDate ?? Date()).lowercased()
-    }
-    
-    func timeRemainingInText() -> String {
-        let formatter = DateComponentsFormatter()
-        let remainingInterval = DateInterval(start: Date(), end: countdown.endDate ?? Date()).duration
-        formatter.unitsStyle = .full
-        formatter.allowedUnits = [.day]
-        
-        return formatter.string(from: remainingInterval) ?? "No interval"
-    }
-    
     func edit() {
         showingAddScreen = true
     }
@@ -44,10 +29,10 @@ struct DetailView: View {
             Spacer()
         }
         .onReceive(timer) { _ in
-            self.timeRemaining = timeRemainingInText()
+            self.timeRemaining = countdown.timeRemaining(units: [.day, .hour, .minute, .second])
         }
         .onAppear {
-            self.timeRemaining = timeRemainingInText()
+            self.timeRemaining = countdown.timeRemaining(units: [.day, .hour, .minute, .second])
         }
         .padding(.all, 20)
         
@@ -74,13 +59,13 @@ struct DetailView: View {
                 
                 Spacer()
                 
-                Text(timeRemainingInText())
+                Text(timeRemaining)
                     .font(.system(size: 40))
                     .fontWeight(.heavy)
                 
                 Spacer()
                 
-                Text(formatDate())
+                Text(countdown.formatDate())
                     .font(.system(size: 16))
                     .fontWeight(.heavy)
             }
@@ -98,6 +83,7 @@ struct DetailView_Previews: PreviewProvider {
         
         let countdown = CountdownEntity(context: context)
         countdown.name = "hej"
+        countdown.endDate = Date(timeIntervalSinceReferenceDate: 693532800)
         
         return NavigationView {
             DetailView(countdown: countdown)

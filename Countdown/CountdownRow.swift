@@ -14,21 +14,6 @@ struct CountdownRow: View {
     
     @State var timeRemaining = ""
     
-    func formatDate() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d. MMMM yyyy"
-        return formatter.string(from: countdown.endDate ?? Date()).lowercased()
-    }
-    
-    func timeRemainingInText() -> String {
-        let formatter = DateComponentsFormatter()
-        let remainingInterval = DateInterval(start: Date(), end: countdown.endDate ?? Date()).duration
-        formatter.unitsStyle = .full
-        formatter.allowedUnits = [.day, .hour, .minute, .second]
-        
-        return formatter.string(from: remainingInterval) ?? "No interval"
-    }
-    
     var body: some View {
         HStack {
             Image("birthday")
@@ -39,12 +24,12 @@ struct CountdownRow: View {
                 Text("\(timeRemaining)")
                     .font(.system(size: 12))
                     .onReceive(timer) { _ in
-                        self.timeRemaining = timeRemainingInText()
+                        self.timeRemaining = countdown.timeRemaining(units: [.month, .day, .hour, .minute, .second])
                     }
                     .onAppear {
-                        self.timeRemaining = timeRemainingInText()
+                        self.timeRemaining = countdown.timeRemaining(units: [.month, .day, .hour, .minute, .second])
                     }
-                Text(formatDate())
+                Text(countdown.formatDate())
                     .font(.system(size: 12))
             }
             

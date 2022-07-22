@@ -20,6 +20,28 @@ struct Countdown: Hashable, Codable, Identifiable {
     }
 }
 
+extension CountdownEntity {
+    func timeRemaining(units: NSCalendar.Unit) -> String {
+        if self.endDate ?? Date() > Date() {
+            let formatter = DateComponentsFormatter()
+            let remainingInterval = DateInterval(start: Date(), end: self.endDate ?? Date()).duration
+            formatter.unitsStyle = .full
+            formatter.allowedUnits = units
+            
+            return formatter.string(from: remainingInterval) ?? "No interval"
+        }
+
+        return "Yay! Det er overstået"
+    }
+    
+    func formatDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d. MMMM yyyy"
+        
+        return formatter.string(from: self.endDate ?? Date()).lowercased()
+    }
+}
+
 class Model: ObservableObject {
     @Published var countdowns: [Countdown]
     
